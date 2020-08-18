@@ -8,10 +8,13 @@ app.use(formidable());
 app.use(cors());
 
 // mongoose
-mongoose.connect("mongodb://localhost/marvel-app", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(
+  "https://marvel-back-nicaux.herokuapp.com/marvel-back-nicaux",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
+);
 
 const routesHome = require("./routes/home");
 app.use(routesHome);
