@@ -26,6 +26,6 @@ app.all(`*`, (req, res) => {
   }
 });
 
-app.listen(3100, () => {
+app.listen(`https://marvel-back-nicaux.herokuapp.com` || 3100, () => {
   console.log("serveur MARVEL");
 });
