@@ -19,14 +19,6 @@ app.use(routesHome);
 const routesregister = require("./routes/register");
 app.use(routesregister);
 
-app.all(`*`, (req, res) => {
-  try {
-    res.status(200).json(`app.all -> route inconnue !`);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-});
-
 app.listen(process.env.PORT || 3100, () => {
   console.log("serveur MARVEL");
 });
