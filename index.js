@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const formidable = require("express-formidable");
 const mongoose = require("mongoose");
@@ -8,13 +9,10 @@ app.use(formidable());
 app.use(cors());
 
 // mongoose
-mongoose.connect(
-  "https://marvel-back-nicaux.herokuapp.com/marvel-back-nicaux",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
-);
+mongoose.connect(process.env.MONGO_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 const routesHome = require("./routes/home");
 app.use(routesHome);
@@ -29,6 +27,6 @@ app.all(`*`, (req, res) => {
   }
 });
 
-app.listen(`https://marvel-back-nicaux.herokuapp.com` || 3100, () => {
+app.listen(process.env.PORT || 3100, () => {
   console.log("serveur MARVEL");
 });
