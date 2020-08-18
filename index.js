@@ -1,8 +1,31 @@
-require("dotenv").config();
-const md5 = require(`md5`);
+const express = require("express");
+const formidable = require("express-formidable");
+const mongoose = require("mongoose");
+const cors = require("cors");
 
-const ts = `1`;
-const keyPublic = process.env.MARVEL_KEY_PUBLIC;
-const keyPrivate = process.env.MARVEL_KEY_PRIVATE;
+const app = express();
+app.use(formidable());
+app.use(cors());
 
-console.log(md5(ts + keyPrivate + keyPublic));
+// mongoose
+mongoose.connect("mongodb://localhost/marvel-app", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+const routesHome = require("./routes/home");
+app.use(routesHome);
+const routesregister = require("./routes/register");
+app.use(routesregister);
+
+app.all(`*`, (req, res) => {
+  try {
+    res.status(200).json(`app.all -> route inconnue !`);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+app.listen(3100, () => {
+  console.log("serveur MARVEL");
+});
